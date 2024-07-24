@@ -1,4 +1,4 @@
-import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 public class ChessBoard {
     public static void main(String[] args) {
@@ -14,30 +14,25 @@ public class ChessBoard {
 				{"r","n","b","q","k","b","n","r"}};
 
         imprimirBoard(board);
-        
-        Scanner scanner = new Scanner(System.in);
-
         while (true) {
-            System.out.println("Digite a coluna do peão (1-8) ou 's' para sair:");
-            String colunaInput = scanner.nextLine().toLowerCase();
+            String colunaInput = JOptionPane.showInputDialog(null, "Digite a coluna do peão (1-8) ou 's' para sair:", JOptionPane.QUESTION_MESSAGE).toLowerCase();
 
             if (colunaInput.equals("s")) {
                 break;
             }
 
-            System.out.println("Digite a linha do peão (1-8):");
-            int linhaInput = Integer.parseInt(scanner.nextLine());
+            int linhaInput = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite a linha do peão (1-8):", JOptionPane.QUESTION_MESSAGE));
 
             int coluna = Integer.parseInt(colunaInput) - 1;
             int linha = 8 - linhaInput;
 
             if (linha < 1 || linha > 7 || coluna < 0 || coluna > 8) {
-                System.out.println("Posição inválida. Tente novamente.");
+                JOptionPane.showMessageDialog(null, "Posição inválida! Tente novamente.", "Informação", JOptionPane.INFORMATION_MESSAGE);
                 continue;
             }
 
             if(!board[linha][coluna].equals("p") && !board[linha][coluna].equals("P")){
-                System.out.println("Peça movimentada não é um peão. Tente novamente.");
+                JOptionPane.showMessageDialog(null, "Peça movimentada não é um peão. Tente novamente.", "Informação", JOptionPane.INFORMATION_MESSAGE);
                 continue;
             }
 
@@ -55,7 +50,7 @@ public class ChessBoard {
             }
                 
             if (!board[destinoLinha][coluna].equals(" ")) {
-                System.out.println("A posição de destino já está ocupada. Tente novamente.");
+                JOptionPane.showMessageDialog(null, "A posição de destino já está ocupada. Tente novamente.", "Informação", JOptionPane.INFORMATION_MESSAGE);
                 continue;
             }
 
@@ -64,8 +59,6 @@ public class ChessBoard {
 
             imprimirBoard(board);
         }
-
-        scanner.close();
 	}
 	
 	public static void imprimirBoard(String[][] board) {
